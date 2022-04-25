@@ -1,0 +1,5 @@
+*
+!.gitignore
+!starship.toml
+!README.md
+!PowershellConfig.txt

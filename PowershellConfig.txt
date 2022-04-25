@@ -1,0 +1,11 @@
+# Starship
+Invoke-Expression (&starship init powershell)
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+# Terminal Icons
+Import-Module Terminal-Icons
+
+$env:AWS_PROFILE="default"
+cls
