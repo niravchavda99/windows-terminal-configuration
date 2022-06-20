@@ -7,44 +7,20 @@ Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 # Terminal Icons
 Import-Module Terminal-Icons
 
-Set-Alias k kubectl;
-Set-Alias ka getAllKubernetes;
-Set-Alias d docker;
-
-function kp() {
-  kubectl get pods,nodes,services -n app
-}
-
-function getAllKubernetes(){
-  kubectl get po,no,svc,ing --all-namespaces;
-  kubectl get cm,secret -n app
-}
-
-Set-Alias aws-test switchToAwsTest;
-Set-Alias aws-dev switchToAwsDev;
-Set-Alias ctx-dev switchToDevContext;
-Set-Alias ctx-test switchToTestContext;
-
-function switchToAwsTest() {
-  $env:AWS_PROFILE="monnai-test"
-}
-
-function switchToAwsDev() {
-  $env:AWS_PROFILE="default"
-}
-
-function switchToDevContext() {
-  k config use-context arn:aws:eks:ap-southeast-1:891745547471:cluster/main-dev
-}
-
-function switchToTestContext() {
-  k config use-context arn:aws:eks:ap-southeast-1:285399005012:cluster/main-test
-}
-
+# Docker WSL
 Set-Alias -Name docker -Value Start-WslDocker
 
 Function Start-WslDocker {
     wsl docker $args
 }
 
-aws-dev
+Set-Alias k kubectl;
+Set-Alias ka getAllKubernetes;
+Set-Alias d docker;
+Set-Alias which Get-Command;
+Set-Alias g gcloud;
+
+function getAllKubernetes() {
+  kubectl get po,no,svc,ing --all-namespaces;
+  kubectl get cm,secret -n app
+}
