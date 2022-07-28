@@ -19,6 +19,11 @@ Set-Alias ka getAllKubernetes;
 Set-Alias d docker;
 Set-Alias which Get-Command;
 Set-Alias g gcloud;
+Set-Alias glog appEngineLogs;
+
+function appEngineLogs() {
+  g app logs tail -s default
+}
 
 function getAllKubernetes() {
   kubectl get po,no,svc,ing --all-namespaces;
