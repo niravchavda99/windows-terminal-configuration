@@ -9,23 +9,26 @@ Import-Module Terminal-Icons
 
 # Docker WSL
 Set-Alias -Name docker -Value Start-WslDocker
+Set-Alias d docker;
+
+# Google Cloud
+Set-Alias gcl gcloud;
+Set-Alias gclog appEngineLogs;
+
+# Git
+Set-Alias glog gitLogGraph;
+
+# Util
+Set-Alias which Get-Command;
 
 Function Start-WslDocker {
     wsl docker $args
 }
 
-Set-Alias k kubectl;
-Set-Alias ka getAllKubernetes;
-Set-Alias d docker;
-Set-Alias which Get-Command;
-Set-Alias g gcloud;
-Set-Alias glog appEngineLogs;
-
 function appEngineLogs() {
-  g app logs tail -s default
+  gcl app logs tail -s default
 }
 
-function getAllKubernetes() {
-  kubectl get po,no,svc,ing --all-namespaces;
-  kubectl get cm,secret -n app
+function gitLogGraph() {
+  git log --oneline --decorate --graph
 }
