@@ -7,28 +7,39 @@ Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 # Terminal Icons
 Import-Module Terminal-Icons
 
+
 # Docker WSL
 Set-Alias -Name docker -Value Start-WslDocker
 Set-Alias d docker;
-
-# Google Cloud
-Set-Alias gcl gcloud;
-Set-Alias gclog appEngineLogs;
-
-# Git
-Set-Alias glog gitLogGraph;
-
-# Util
-Set-Alias which Get-Command;
 
 Function Start-WslDocker {
     wsl docker $args
 }
 
+
+# Google Cloud
+Set-Alias gcl gcloud;
+Set-Alias gclog appEngineLogs;
+
 function appEngineLogs() {
   gcl app logs tail -s default
 }
 
+
+# Gradle
+Set-Alias gw gradleWrapper;
+
+Function gradleWrapper {
+  ./gradlew $args
+}
+
+# Git
+Set-Alias glog gitLogGraph;
+
 function gitLogGraph() {
   git log --oneline --decorate --graph
 }
+
+
+# Util
+Set-Alias which Get-Command;
