@@ -16,16 +16,6 @@ Function Start-WslDocker {
     wsl docker $args
 }
 
-
-# Google Cloud
-Set-Alias gcl gcloud;
-Set-Alias gclog appEngineLogs;
-
-function appEngineLogs() {
-  gcl app logs tail -s default
-}
-
-
 # Gradle
 Set-Alias gw gradleWrapper;
 
@@ -33,18 +23,74 @@ Function gradleWrapper {
   ./gradlew $args
 }
 
-# Git
+# Git Utils
 Set-Alias glog gitLogGraph;
+Set-Alias gcmt GitAddAndCommit;
+Set-Alias gph GitPush;
+Set-Alias gpl GitPull;
+Set-Alias gck GitCheckout;
+Set-Alias gcl GitClone;
 
 function gitLogGraph() {
   git log --oneline --decorate --graph
 }
 
+Function GitAddAndCommit {
+  git add .
+  git commit -m $args
+}
+
+Function GitPush {
+  git push $args
+}
+
+Function GitPull {
+  git pull $args -vv
+}
+
+Function GitCheckout {
+  git checkout $args
+}
+
+Function GitClone {
+  if ($args.Length -eq 0) {
+    echo "No args specified. Try GitClone <user> <repo-name>";
+    return;
+  }
+
+  if($args.Length -eq 1) {
+    echo "Invalid args specified. Try GitClone <user> <repo-name>";
+    return;
+  }
+
+  $sshPrefix = "git@github.com:";
+  $gitSuffix = ".git";
+  $githubUser = $args[0];
+  $repoName = $args[1];
+  if ($args[0] -eq "self") {
+    $githubUser = "niravchavda99";
+  }
+  $sshLink = $sshPrefix + $githubUser + "/" + $repoName + $gitSuffix;
+  git clone $sshLink;
+}
 
 # Util
 Set-Alias which Get-Command;
 Set-Alias la ListHiddenFiles;
+Set-Alias .. GoBack;
+
+Function GoBack {
+  cd ..
+}
 
 Function ListHiddenFiles {
   Get-ChildItem -Force
+}
+
+Function FindProcess {
+  netstat -ano | findStr $args
+}
+
+Function KillProcess {
+  taskkill /F /PID $args
 }
