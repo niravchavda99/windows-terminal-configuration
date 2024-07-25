@@ -29,7 +29,7 @@ Set-Alias gcmt GitAddAndCommit;
 Set-Alias gph GitPush;
 Set-Alias gpl GitPull;
 Set-Alias gck GitCheckout;
-Set-Alias gcl GitClone;
+Set-Alias gcln GitClone;
 
 function gitLogGraph() {
   git log --oneline --decorate --graph
